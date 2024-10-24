@@ -1,12 +1,12 @@
-import Hero from "../assets/Hero.png";
-import Phone1 from "../assets/Phone1.jpg";
-import Phone2 from "../assets/Phone2.jpg";
-import Phone3 from "../assets/Phone3.jpg";
-import Phone4 from "../assets/Phone4.jpg";
-import Phone5 from "../assets/Phone5.jpg";
-import Phone6 from "../assets/Phone6.jpg";
-import Phone7 from "../assets/Phone7.jpg";
-import Phone8 from "../assets/Phone8.jpg";
+import Hero from "/assets/Hero.png";
+import Phone1 from "/assets/Phone1.jpg";
+import Phone2 from "/assets/Phone2.jpg";
+import Phone3 from "/assets/Phone3.jpg";
+import Phone4 from "/assets/Phone4.jpg";
+import Phone5 from "/assets/Phone5.jpg";
+import Phone6 from "/assets/Phone6.jpg";
+import Phone7 from "/assets/Phone7.jpg";
+import Phone8 from "/assets/Phone8.jpg";
 
 
 import { Swiper, SwiperSlide } from "swiper/react";

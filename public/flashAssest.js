@@ -1,7 +1,7 @@
 export const product = [
   {
     id: 1,
-    image: '/src/assets/gamepad.png',
+    image: '/assets/gamepad.png',
     name: 'HAVIT HV-G92 Gamepad',
     price: 160,
     discountPrice: 120,
@@ -9,7 +9,7 @@ export const product = [
   },
   {
     id: 2,
-    image: '/src/assets/keyboard.png',
+    image: '/assets/keyboard.png',
     name: 'AK-900 Wired Keyboard',
     price: 1160,
     discountPrice: 960,
@@ -17,7 +17,7 @@ export const product = [
   },
   {
     id: 3,
-    image: '/src/assets/Monitor.png',
+    image: '/assets/Monitor.png',
     name: 'IPS LCD Gaming Monitor',
     price: 400,
     discountPrice: 370,
@@ -25,7 +25,7 @@ export const product = [
   },
   {
     id: 4,
-    image: '/src/assets/Chair.png',
+    image: '/assets/Chair.png',
     name: 'S-Series Comfort Chair',
     price: 400,
     discountPrice: 375,
@@ -33,7 +33,7 @@ export const product = [
   },
   {
     id: 5,
-    image: '/src/assets/gucci-bag.png',
+    image: '/assets/gucci-bag.png',
     name: 'Gucci duffle bag',
     price: 1190,
     discountPrice: 960,
@@ -41,7 +41,7 @@ export const product = [
   },
   {
     id: 6,
-    image: '/src/assets/cpu_cooler.png',
+    image: '/assets/cpu_cooler.png',
     name: 'RGB liquid CPU Cooler',
     price: 1960,
     discountPrice: 1960,
@@ -49,7 +49,7 @@ export const product = [
   },
   {
     id: 7,
-    image: '/src/assets/gamepad2.png',
+    image: '/assets/gamepad2.png',
     name: 'GP11 Shooter USB Gamepad',
     price: 550,
     discountPrice: 550,
@@ -57,7 +57,7 @@ export const product = [
   },
   {
     id: 8,
-    image: '/src/assets/jacket.png',
+    image: '/assets/jacket.png',
     name: 'Quilted Satin Jacket',
     price: 750,
     discountPrice: 750,
@@ -67,7 +67,7 @@ export const product = [
 export const Best = [
   {
     id: 9,
-    image: '/src/assets/north_coast.png',
+    image: '/assets/north_coast.png',
     name: 'The north coat',
     price: 350,
     discountPrice: 260,
@@ -75,7 +75,7 @@ export const Best = [
   },
   {
     id: 10,
-    image: '/src/assets/gucci-bag.png',
+    image: '/assets/gucci-bag.png',
     name: 'Gucci duffle bag',
     price: 1160,
     discountPrice: 960,
@@ -83,7 +83,7 @@ export const Best = [
   },
   {
     id: 11,
-    image: '/src/assets/cooler.png',
+    image: '/assets/cooler.png',
     name: 'RGB liquid CPU Cooler',
     price: 170,
     discountPrice: 160,
@@ -91,7 +91,7 @@ export const Best = [
   },
   {
     id: 12,
-    image: '/src/assets/bookshelf.png',
+    image: '/assets/Bookshelf.png',
     name: 'Small BookShelf',
     price: 360,
     discountPrice: 360,
@@ -103,7 +103,7 @@ export const Best = [
     price: 1160,
     discountedPrice: 960,
     rating: 35,
-    image: '/src/assets/laptop.png'
+    image: '/assets/laptop.png'
   },
   {
     id: 14,
@@ -111,7 +111,7 @@ export const Best = [
     price: 960,
     discountedPrice: 960,
     rating: 5,
-    image: '/src/assets/New-Mercedes-Benz.png'
+    image: '/assets/New-Mercedes-Benz.png'
   },
   {
     id: 15,
@@ -119,7 +119,7 @@ export const Best = [
     price: 100,
     discountedPrice: 100,
     rating: 3,
-    image: '/src/assets/Dog.png'
+    image: '/assets/Dog.png'
   },
   {
     id: 12,
@@ -127,7 +127,7 @@ export const Best = [
     price: 360,
     discountedPrice: 360,
     rating: 4.5,
-    image: '/src/assets/Cart.png'
+    image: '/assets/Cart.png'
   }
 ]
 export const NewProduct = [
@@ -135,7 +135,7 @@ export const NewProduct = [
     id: 16,
     name: 'PlayStation 5',
     description: 'Black and White version of the PS5 coming out on sale.',
-    image: '/src/assets/playstation5.png',
+    image: '/assets/PlayStation5.png',
     buttonText: 'Shop Now',
     GridClass: 'col-span-2 row-span-2'
   },
@@ -143,7 +143,7 @@ export const NewProduct = [
     id: 17,
     name: "Women's Collections",
     description: 'Featured women collections that give you another vibe.',
-    image: '/src/assets/womens-collections.png',
+    image: '/assets/womens-collections.png',
     buttonText: 'Shop Now',
     GridClass: 'col-span-2',
     isWomen: true
@@ -152,14 +152,14 @@ export const NewProduct = [
     id: 18,
     name: 'Speakers',
     description: 'Amazon wireless speakers.',
-    image: '/src/assets/speakers.png',
+    image: '/assets/speakers.png',
     buttonText: 'Shop Now'
   },
   {
     id: 19,
     name: 'Perfume',
     description: 'GUCCI INTENSE-OUD EDP.',
-    image: '/src/assets/perfume.png',
+    image: '/assets/perfume.png',
     buttonText: 'Shop Now'
   }
 ]

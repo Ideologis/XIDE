@@ -1,5 +1,5 @@
 
-import Iphone_logo from "../../assets/Iphone_logo.png";
+import Iphone_logo from "/assets/Iphone_logo.png";
 import Slider from "../../Features/Slider";
 
 const Header = () => {
