@@ -1,7 +1,6 @@
-import { Best } from "../../assets/flashAssest";
+import { Best } from "../../../public/flashAssest";
 import FlashCard from "../ProductCard/FlashCard";
 import Carousels from "../../Features/Carousels";
-
 
 const BestSales = () => {
   return (

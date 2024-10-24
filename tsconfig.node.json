@@ -6,6 +6,5 @@
     "moduleResolution": "bundler",
     "allowSyntheticDefaultImports": true
   },
-  "include": ["vite.config.ts", "src/**/*"],
-
+  "include": ["vite.config.ts", "src/**/*", "public/flashAssest.js"]
 }

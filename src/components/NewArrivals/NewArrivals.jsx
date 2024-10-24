@@ -1,5 +1,5 @@
 import FlashSales from "../FlashSales/FlashSales";
-import { NewProduct } from "../../assets/flashAssest";
+import { NewProduct } from "../../../public/flashAssest";
 import ArrivalCards from "./ArrivalCards";
 
 const NewArrivals = () => {

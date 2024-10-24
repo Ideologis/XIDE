@@ -26,6 +26,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["src"],
+  "include": ["src", "public/flashAssest.js"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
