@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from "./PAGES/HomePage/Home";
-
+import Navbar from "./components/Navbar/Navbar"; // Adjusted path
 import Cart from "./PAGES/CartPage/Cart";
 import SignUp from "./PAGES/SignUp/SignUp";
 import CartProvider from "./components/CartProvider.jsx";
@@ -17,6 +17,7 @@ function App() {
   return (
     <Router>
       <CartProvider>
+        <Navbar /> {/* Navbar is included here, so it appears on all pages */}
         <Routes>
           <Route
             path="/success"

@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Navbar from '../../components/Navbar/Navbar';
 import Confetti from 'react-confetti';
 import { FaCheckCircle } from 'react-icons/fa';
 
@@ -27,7 +26,7 @@ const Success = () => {
 
   return (
     <>
-      <Navbar />
+
       <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
         <div className="bg-white p-6 rounded-lg shadow-lg text-center max-w-md w-full">
           <div className="text-green-500">

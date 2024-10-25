@@ -1,5 +1,5 @@
 import  { useEffect, useState } from "react";
-import Navbar from "../../components/Navbar/Navbar";
+
 import Header from "../../components/Header/Header";
 import FlashSales from "../../components/FlashSales/FlashSales";
 
@@ -33,7 +33,7 @@ const Home = () => {
   return (
     <div>
       {showConfetti && <Confetti recycle={false} numberOfPieces={200} />}
-      <Navbar />
+      
       <Header />
       <FlashSales title="Today's" TEXT="FLASH SALES" />
       <div>

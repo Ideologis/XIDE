@@ -1,5 +1,5 @@
 import { CartContext } from '../../components/CartProvider.jsx'
-import Navbar from '../../components/Navbar/Navbar'
+
 import { NavLink } from "react-router-dom";
 import supabase from '../../config/supabase.Client.js'
 import { useContext, useEffect, useState } from 'react'
@@ -46,7 +46,7 @@ const SignUp = () => {
       const { error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
-          redirectTo: `${window.location.origin}/SignUp`
+          redirectTo: `${window.location.origin}/cart`
         }
       })
 
@@ -77,7 +77,7 @@ const SignUp = () => {
 
   return (
     <>
-      <Navbar />
+     
       <div className="flex justify-center items-center mt-20 p-10 gap-10">
         <img
           src="/dl.beatsnoop 1.png"

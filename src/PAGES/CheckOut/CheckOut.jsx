@@ -13,8 +13,7 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 
-// Import Navbar component for the navigation bar
-import Navbar from "../../components/Navbar/Navbar";
+
 // Import Checkbox component for user confirmations
 import { Checkbox } from "@/components/ui/checkbox";
 // Import Label component for form labels
@@ -133,7 +132,7 @@ const CheckOut = () => {
     <div className="flex flex-col">
       {/* Render the navigation bar */}
 
-      <Navbar />
+      
       <div className="my-32 px-20">
         {/* Page title */}
         <h1 className="text-2xl font-semibold mb-4">Billing details</h1>
