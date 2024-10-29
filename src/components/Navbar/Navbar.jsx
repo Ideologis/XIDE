@@ -107,7 +107,7 @@ const Navbar = () => {
       >
         <div className="mx-auto px-4 max-sm:px-3">
           <div className="flex justify-between items-center h-16 max-sm:h-14">
-            <h2 className="font-bold text-xl max-sm:text-lg">XIDE</h2>
+            <NavLink to="/" className="font-bold text-xl max-sm:text-lg cursor-pointer">XIDE</NavLink>
 
             {/* Desktop Menu */}
             <div className=" max-sm:hidden lg:flex items-center space-x-8">
@@ -244,9 +244,12 @@ const Navbar = () => {
                       className="text-gray-700 hover:text-gray-900 cursor-pointer"
                     />
                     {cartState.userEmail && cartState.showProfile && (
-                      <div className="h-8 w-8 rounded-full bg-blue-500 flex items-center justify-center text-white">
+                      <NavLink
+                        to="/signup"
+                        className="h-8 w-8 rounded-full bg-blue-500 flex items-center justify-center text-white"
+                      >
                         {getUserInitial(cartState.userEmail)}
-                      </div>
+                      </NavLink>
                     )}
                   </div>
                 </div>
