@@ -76,58 +76,94 @@ const SignUp = () => {
   }
 
   return (
-    <>
-     
-      <div className="flex justify-center items-center mt-20 p-10 gap-10">
-        <img
-          src="/dl.beatsnoop 1.png"
-          alt=""
-          style={{ width: "30%", height: "30%", borderRadius: "10%" }}
-        />
+    <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
+      <div className="flex flex-col items-center justify-center min-h-screen px-4 pt-20 max-sm:pt-16">
+        {/* Container with glass effect */}
+        <div className="w-full max-w-4xl bg-white/80 backdrop-blur-lg rounded-2xl shadow-xl p-8 max-sm:p-6">
+          <div className="flex flex-row items-center justify-between gap-10 max-sm:flex-col max-sm:gap-6">
+            {/* Image Section */}
+            <div className="flex-1 max-sm:w-full max-sm:flex max-sm:justify-center">
+              <img
+                src="/dl.beatsnoop 1.png"
+                alt="Welcome"
+                className="w-full max-w-md rounded-2xl shadow-lg transform transition-transform duration-500 hover:scale-105 max-sm:w-3/4"
+              />
+            </div>
 
-        <div className="sign flex flex-col items-center">
-          {userEmail ? (
-            <>
-              <h1 className="text-2xl font-semibold mb-2">
-                Welcome, {userEmail?.split("@")[0]}
-              </h1>
-              <p className="text-xs font-semibold mb-4">
-                You are already signed in
-              </p>
-              <button
-                className="transition duration-300 ease-in-out transform hover:scale-105 hover:bg-red-600 bg-red-500 text-white px-4 py-2 rounded-md"
-                onClick={handleLogout}
-              >
-                Log Out
-              </button>
-              <NavLink
-                to="/cart"
-                className="bg-blue-500 text-white px-4 py-2 rounded-md transition duration-300 ease-in-out transform hover:scale-105 hover:bg-green-600 mt-4"
-              >
-                Return To Shop
-              </NavLink>
-            </>
-          ) : (
-            <>
-              <h1 className="text-2xl font-semibold mb-2">Create an Account</h1>
-              <p className="text-xs font-semibold">
-                sign up briskly with google
-              </p>
-              <button
-                className="transition duration-300 ease-in-out transform hover:scale-105 hover:bg-gray-200 flex justify-center mt-20 items-center gap-2 bg-gray-100 text-black px-4 py-2 rounded-md border-2 border-gray-300"
-                onClick={handleGoogleSignUp}
-              >
-                <img src="/Icon-Google.png" alt="" />
-                <span className="text-sm font-semibold">
-                  Sign up with Google
-                </span>
-              </button>
-            </>
-          )}
+            {/* Sign Up Section */}
+            <div className="flex-1 flex flex-col items-center justify-center max-sm:w-full">
+              {userEmail ? (
+                // Logged In State
+                <div className="w-full space-y-6 text-center">
+                  <div className="space-y-2">
+                    <div className="h-20 w-20 mx-auto bg-purple-700 rounded-full flex items-center justify-center text-white text-3xl font-bold mb-4">
+                      {userEmail[0].toUpperCase()}
+                    </div>
+                    <h1 className="text-2xl font-bold text-gray-800">
+                      Welcome back!
+                    </h1>
+                    <p className="text-purple-700 font-medium">
+                      {userEmail?.split("@")[0]}
+                    </p>
+                  </div>
+
+                  <div className="space-y-4 w-full max-w-xs mx-auto">
+                    <button
+                      onClick={handleLogout}
+                      className="w-full bg-red-500 hover:bg-red-600 text-white font-semibold py-3 px-6 rounded-lg transition duration-300 ease-in-out transform hover:scale-105 shadow-md"
+                    >
+                      Log Out
+                    </button>
+                    <NavLink
+                      to="/cart"
+                      className="block w-full bg-purple-700 hover:bg-green-600 text-white font-semibold py-3 px-6 rounded-lg text-center transition duration-300 ease-in-out transform hover:scale-105 shadow-md"
+                    >
+                      Return To Shop
+                    </NavLink>
+                  </div>
+                </div>
+              ) : (
+                // Sign Up State
+                <div className="w-full max-w-sm space-y-8 text-center">
+                  <div className="space-y-2">
+                    <h1 className="text-3xl font-bold text-gray-800 max-sm:text-2xl">
+                      Create an Account
+                    </h1>
+                    <p className="text-gray-600 max-sm:text-sm">
+                      Join our community today
+                    </p>
+                  </div>
+
+                  <button
+                    onClick={handleGoogleSignUp}
+                    className="w-full group relative bg-white hover:bg-gray-50 text-gray-700 font-semibold py-3 px-6 rounded-lg border-2 border-gray-200 transition duration-300 ease-in-out transform hover:scale-105 shadow-md flex items-center justify-center gap-3"
+                  >
+                    <img 
+                      src="/Icon-Google.png" 
+                      alt="Google" 
+                      className="w-6 h-6"
+                    />
+                    <span className="max-sm:text-sm">
+                      Continue with Google
+                    </span>
+                  </button>
+
+                  <div className="pt-4">
+                    <p className="text-sm text-gray-500">
+                      By signing up, you agree to our{" "}
+                      <a href="#" className="text-purple-700 hover:underline">
+                        Terms of Service
+                      </a>
+                    </p>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
-export default SignUp
+export default SignUp;

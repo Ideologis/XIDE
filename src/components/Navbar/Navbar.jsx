@@ -1,5 +1,8 @@
-
-import { HiOutlineShoppingCart, HiBars4, HiXMark } from "react-icons/hi2";
+import {
+  HiOutlineShoppingCart,
+  HiMiniBars3BottomRight,
+  HiXMark,
+} from "react-icons/hi2";
 import { BiSearch } from "react-icons/bi";
 import { FiHeart } from "react-icons/fi";
 import "./Navbar.css";
@@ -68,36 +71,46 @@ const Navbar = () => {
 
   return (
     <div>
-      <div className="banner bg-black flex justify-center  items-center gap-20 p-3  max-sm:flex-col max-sm:gap-4">
+      <div className="banner bg-black flex justify-center items-center gap-20 p-3 max-sm:flex-col max-sm:gap-2 max-sm:p-2">
         <div className="flex max-sm:flex-col max-sm:items-center">
-          <h2 className="mx-4 text-white max-sm:mb-3 max-sm:text-center max-sm:text-sm ">
+          <p className="mx-4  text-white max-sm:mx-2 max-sm:text-xs max-sm:text-center">
             Summer Sale For All Swim Suits And Free Express Delivery - OFF 50%!
-          </h2>
-          <a href="" className="font-bold underline  text-white max-sm:text-sm">
-            ShopNow
-          </a>
+            <a
+              href=""
+              className="font-bold underline text-white max-sm:text-xs max-sm:mt-1"
+            >
+              {" "}
+              ShopNow
+            </a>
+          </p>
         </div>
-        <div className="flex items-center gap-2">
-          <label htmlFor="language-select" className="text-white max-sm:text-sm">Choose a language </label>
-          <select id="language-select" onChange={handleLanguage} value={language}>
+        <div className="flex items-center gap-2 max-sm:text-xs">
+          <label htmlFor="language-select" className="text-white">
+            Choose a language{" "}
+          </label>
+          <select
+            id="language-select"
+            onChange={handleLanguage}
+            value={language}
+            className="max-sm:text-xs"
+          >
             <option value="English">English</option>
             <option value="Deutsch">Deutsch</option>
             <option value="French">French</option>
           </select>
         </div>
       </div>
-
       <nav
         className={`fixed w-full bg-white z-50 transition-all duration-300 ${
           scrollY > 0 ? "top-0" : "top-[60px]"
-        }`}
+        } ${scrollY > 0 ? "max-sm:top-0" : "max-sm:top-[80px]"}`}
       >
-        <div className="mx-auto px-4 max-sm:px-6 lg:px-8">
-          <div className="flex justify-around max-sm:justify-between items-center h-16">
-            <h2 className="font-bold text-xl">XIDE</h2>
+        <div className="mx-auto px-4 max-sm:px-3">
+          <div className="flex justify-between items-center h-16 max-sm:h-14">
+            <h2 className="font-bold text-xl max-sm:text-lg">XIDE</h2>
 
             {/* Desktop Menu */}
-            <div className="max-sm:hidden lg:flex items-center space-x-8">
+            <div className=" max-sm:hidden lg:flex items-center space-x-8">
               {menuItems.map((item) => (
                 <NavLink
                   key={item}
@@ -107,6 +120,27 @@ const Navbar = () => {
                   {item}
                 </NavLink>
               ))}
+            </div>
+
+            {/* Mobile Menu Button - Move to right side */}
+            <div className="hidden max-sm:flex items-center gap-8 ">
+              <NavLink to="/Cart" className="relative">
+                <HiOutlineShoppingCart
+                  size={20}
+                  className="text-gray-700 hover:text-gray-900 cursor-pointer"
+                />
+                {cartState.items.length > 0 && (
+                  <span className="bg-red-500 text-white rounded-full px-1.5 py-0.5 text-xs absolute -top-2 -right-2">
+                    {cartState.items.length}
+                  </span>
+                )}
+              </NavLink>
+              <button
+                onClick={toggleMenu}
+                className="text-gray-700 hover:text-gray-900"
+              >
+                <HiMiniBars3BottomRight size={24} />
+              </button>
             </div>
 
             {/* Desktop Search and Icons */}
@@ -155,20 +189,10 @@ const Navbar = () => {
                   <span>Not logged in</span>
                 )} */}
               </div>
-
-              {/* Mobile Menu Button */}
-              <div className="hidden max-sm:block">
-                <button
-                  onClick={toggleMenu}
-                  className="text-gray-700 hover:text-gray-900"
-                >
-                  <HiBars4 size={24} />
-                </button>
-              </div>
             </div>
           </div>
 
-          {/* Mobile Slide-in Menu */}
+          {/* Mobile Slide-in Menu update */}
           <AnimatePresence>
             {isOpen && (
               <motion.div
@@ -176,51 +200,54 @@ const Navbar = () => {
                 animate="open"
                 exit="closed"
                 variants={menuVariants}
-                className="fixed top-0 right-0 bottom-0 w-full bg-slate-500 shadow-lg z-50 lg:hidden "
+                className="fixed top-0 right-0 bottom-0 w-full bg-white shadow-lg z-50 lg:hidden"
               >
-                <div className="p-0 w-full">
-                  <button
-                    onClick={toggleMenu}
-                    className="absolute top-4 right-4 text-gray-700 hover:text-gray-900"
-                  >
-                    <HiXMark size={24} />
-                  </button>
-                  <ul className="mt-14 p-4 bg-white flex  justify-between items-center">
+                <div className="p-4 flex flex-col h-full">
+                  <div className="flex justify-between items-center mb-6">
+                    <h2 className="font-bold text-xl">Menu</h2>
+                    <button
+                      onClick={toggleMenu}
+                      className="text-gray-700 hover:text-gray-900"
+                    >
+                      <HiXMark size={24} />
+                    </button>
+                  </div>
+
+                  <div className="relative mb-6">
+                    <input
+                      type="text"
+                      placeholder="What are you looking for?"
+                      className="w-full py-2 px-4 pr-10 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200 focus:border-transparent"
+                    />
+                    <button className="absolute right-3 top-1/2 transform -translate-y-1/2">
+                      <BiSearch size={19} />
+                    </button>
+                  </div>
+
+                  <ul className="space-y-4 flex flex-col items-center gap-8 mt-8">
                     {menuItems.map((item) => (
                       <li key={item}>
-                        <a
-                          href={`#${item.toLowerCase()}`}
-                          className="text-gray-700 hover:text-gray-900 block bg-white py-2"
+                        <NavLink
+                          to={item === "Home" ? "/" : `/${item.toLowerCase()}`}
+                          className="bg-purple-700 hover:bg-green-600 hover:text-black  text-white font-bold  py-2 px-4 rounded transition duration-300 ease-in-out transform hover:scale-105 w-full text-center"
                           onClick={toggleMenu}
                         >
                           {item}
-                        </a>
+                        </NavLink>
                       </li>
                     ))}
                   </ul>
-                  <div className="space-y-4 bg-white">
-                    <div className="relative">
-                      <input
-                        type="text"
-                        placeholder="Search..."
-                        className="w-full py-2 px-4 pr-10 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200 focus:border-transparent placeholder:text-sm"
-                      />
-                      <button className="absolute right-3 top-1/2 transform -translate-y-1/2">
-                        <BiSearch size={19} />
-                      </button>
-                    </div>
-                    <div className="flex justify-around">
-                      <FiHeart
-                        size={20}
-                        className="text-gray-700 hover:text-gray-900 cursor-pointer m-2"
-                      />
-                      <NavLink to="/Cart">
-                        <HiOutlineShoppingCart
-                          size={20}
-                          className="text-gray-700 hover:text-gray-900 cursor-pointer"
-                        />
-                      </NavLink>
-                    </div>
+
+                  <div className="mt-auto flex justify-around py-4 border-t">
+                    <FiHeart
+                      size={24}
+                      className="text-gray-700 hover:text-gray-900 cursor-pointer"
+                    />
+                    {cartState.userEmail && cartState.showProfile && (
+                      <div className="h-8 w-8 rounded-full bg-blue-500 flex items-center justify-center text-white">
+                        {getUserInitial(cartState.userEmail)}
+                      </div>
+                    )}
                   </div>
                 </div>
               </motion.div>

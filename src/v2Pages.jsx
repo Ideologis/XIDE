@@ -1,19 +1,18 @@
 
-import Navbar from './components/Navbar/Navbar'; // Assuming this is the correct path
+
 import {NavLink} from "react-router-dom";
 const V2Pages = () => {
   return (
-    <>
-      <Navbar />
+   
       <div className="min-h-screen bg-gradient-to-b from-purple-100 to-pink-100 ">
-        <div className="flex flex-col items-center justify-center ">
+        <div className="flex flex-col items-center justify-center max-sm:my-10 max-sm:mx-4">
           {" "}
           {/* Adjust based on Navbar height */}
           <div className="bg-white p-2 rounded-lg shadow-lg text-center max-w-md w-full mt-40">
             <div className="text-purple-500">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-20 w-20 mx-auto"
+                className="h-20 w-20 mx-auto max-sm:h-10 max-sm:w-10"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -26,32 +25,32 @@ const V2Pages = () => {
                 />
               </svg>
             </div>
-            <h2 className="text-3xl font-bold text-purple-600 mt-6">
+            <h2 className="text-3xl font-bold text-purple-600 mt-6 max-sm:text-xl">
               The wait is almost over...
             </h2>
-            <p className="mt-4 text-gray-700 text-lg">
+            <p className="mt-4 text-gray-700 text-lg max-sm:text-sm">
               You → The reason we keep innovating Thank you for choosing us! ❤️
             </p>
-            <h1 className="text-gray-600 mt-2 font-bold">
+            <h1 className="text-gray-600 mt-2 font-bold max-sm:text-sm">
               Expect this page in the next release
             </h1>
 
             <div className="mt-8 space-y-4">
               <NavLink
                 to="/"
-                className="bg-blue-500 text-white px-6 py-2 rounded-md transition duration-300 ease-in-out transform hover:scale-105  hover:bg-purple-600"
+                className="bg-blue-500 text-white px-6 py-2 rounded-md transition duration-300 ease-in-out transform hover:scale-105  hover:bg-purple-600 max-sm:text-sm"
               >
                 Return To Shop
               </NavLink>
               
-              <p className="text-sm text-gray-500">
+              <p className="text-sm text-gray-500 max-sm:text-xs">
                 Share your experience with us on social media using #Ideologist
               </p>
             </div>
           </div>
         </div>
       </div>
-    </>
+  
   );
 };
 

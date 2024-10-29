@@ -13,7 +13,6 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 
-
 // Import Checkbox component for user confirmations
 import { Checkbox } from "@/components/ui/checkbox";
 // Import Label component for form labels
@@ -129,239 +128,267 @@ const CheckOut = () => {
   };
 
   return (
-    <div className="flex flex-col">
-      {/* Render the navigation bar */}
-
-      
-      <div className="my-32 px-20">
+    <div className="flex flex-col min-h-screen bg-gray-50">
+      <div className="my-20 px-8 max-sm:my-16 max-sm:px-4">
         {/* Page title */}
-        <h1 className="text-2xl font-semibold mb-4">Billing details</h1>
-        {/* Payment method selection form */}
-        <form
-          onSubmit={handleSubmit}
-          className="space-y-4 mb-4 flex flex-col gap-4"
-        >
-          {/* Label for the payment method selection */}
-          <Label className="mb-4">Select your chilled payment method</Label>
+        <h1 className="text-2xl font-bold mb-6 text-gray-800 max-sm:text-xl">
+          Billing details
+        </h1>
 
-          <RadioGroup
-            disabled={!isUserSignedIn || isCartEmpty}
-            onValueChange={(value) => {
-              setCheckOut(value);
-              if (value === "direct") {
-                setMonths(null);
-                setPaymentDay(null);
-                setIsFormValid(false);
-                setIsPaymentConfirmed(false);
-              }
-            }}
-          >
-            {/* Installment payment option */}
-            <div className="insta flex gap-4 items-center">
-              <RadioGroupItem
-                value="installment"
-                disabled={!isUserSignedIn || isCartEmpty}
-              />
-              <Label
-                className={!isUserSignedIn || isCartEmpty ? "opacity-50" : ""}
-              >
-                Installment payment
-              </Label>
-            </div>
-            {/* Direct payment option */}
-            <div className="direct flex gap-4 items-center">
-              <RadioGroupItem
-                value="direct"
-                disabled={!isUserSignedIn || isCartEmpty}
-              />
-              <Label
-                className={!isUserSignedIn || isCartEmpty ? "opacity-50" : ""}
-              >
-                Direct Payment
-              </Label>
-            </div>
-          </RadioGroup>
+        {/* Payment method selection form */}
+        <form onSubmit={handleSubmit} className="space-y-6 mb-8">
+          <div className="bg-white p-6 rounded-2xl shadow-sm max-sm:p-4">
+            <Label className="text-lg font-semibold text-gray-800 mb-4 block max-sm:text-base">
+              Select your payment method
+            </Label>
+
+            <RadioGroup
+              disabled={!isUserSignedIn || isCartEmpty}
+              onValueChange={(value) => {
+                setCheckOut(value);
+                if (value === "direct") {
+                  setMonths(null);
+                  setPaymentDay(null);
+                  setIsFormValid(false);
+                  setIsPaymentConfirmed(false);
+                }
+              }}
+              className="space-y-4"
+            >
+              <div className="flex items-center gap-3 p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors max-sm:p-3">
+                <RadioGroupItem
+                  value="installment"
+                  disabled={!isUserSignedIn || isCartEmpty}
+                />
+                <Label
+                  className={!isUserSignedIn || isCartEmpty ? "opacity-50" : ""}
+                >
+                  Installment payment
+                </Label>
+              </div>
+
+              <div className="flex items-center gap-3 p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors max-sm:p-3">
+                <RadioGroupItem value="direct" />
+                <Label
+                  className={!isUserSignedIn || isCartEmpty ? "opacity-50" : ""}
+                >
+                  Direct Payment
+                </Label>
+              </div>
+            </RadioGroup>
+          </div>
+
+          {/* Payment Details Section */}
+          <div className="flex flex-col lg:flex-row gap-8 max-sm:gap-4">
+            {checkOut === "installment" && (
+              <div className="flex-1 bg-white p-6 rounded-2xl shadow-sm max-sm:p-4">
+                <h3 className="text-xl font-semibold mb-6 text-gray-800 max-sm:text-lg">
+                  Installment Details
+                </h3>
+
+                <div className="space-y-4">
+                  <div>
+                    <Label className="text-gray-700 mb-2 block">
+                      Number of months
+                    </Label>
+                    <Select
+                      id="months"
+                      onValueChange={(value) => {
+                        setMonths(Number(value));
+                        setIsFormValid(!!value && !!paymentDay);
+                      }}
+                    >
+                      <SelectTrigger className="w-full p-3 rounded-xl border-gray-200">
+                        <SelectValue placeholder="Select months" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {[2, 4, 6, 9, 12].map((item) => (
+                          <SelectItem key={item} value={item.toString()}>
+                            {item} month{item > 1 ? "s" : ""}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  <div>
+                    <Label className="text-gray-700 mb-2 block">
+                      Payment Day
+                    </Label>
+                    <Select
+                      id="paymentDay"
+                      onValueChange={(value) => {
+                        setPaymentDay(Number(value));
+                        setIsFormValid(!!value && !!months);
+                      }}
+                    >
+                      <SelectTrigger className="w-full p-3 rounded-xl border-gray-200">
+                        <SelectValue placeholder="Select day" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {Array.from({ length: 28 }, (_, i) => i + 1).map(
+                          (day) => (
+                            <SelectItem key={day} value={day.toString()}>
+                              Day {day}
+                            </SelectItem>
+                          )
+                        )}
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  {isFormvalid && (
+                    <div className="mt-6 p-4 bg-purple-50 rounded-xl border border-purple-100">
+                      <p className="text-sm text-purple-800 font-medium">
+                        ₦ {monthlyPayment.toFixed(2)} will be deducted monthly
+                        on day {paymentDay} for {months} months
+                      </p>
+                    </div>
+                  )}
+
+                  <div className="mt-6">
+                    <div className="flex items-center gap-3">
+                      <Checkbox
+                        checked={isPaymentConfirmed}
+                        onCheckedChange={handlePackageConfirmation}
+                        disabled={!months || !paymentDay}
+                        className="rounded-md"
+                      />
+                      <Label
+                        className={
+                          !months || !paymentDay
+                            ? "opacity-50"
+                            : "text-sm text-gray-600"
+                        }
+                      >
+                        I confirm the installment package details
+                      </Label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {checkOut === "direct" && (
+              <div className="flex-1 bg-white p-6 rounded-2xl shadow-sm max-sm:p-4">
+                <h3 className="text-xl font-semibold mb-6 text-gray-800 max-sm:text-lg">
+                  Billing Information
+                </h3>
+
+                <div className="space-y-4">
+                  <div>
+                    <Label className="text-gray-700 mb-2 block">
+                      Full Name
+                    </Label>
+                    <Input
+                      placeholder="Enter your full name"
+                      id="fullname"
+                      required
+                      className="w-full p-3 rounded-xl border-gray-200 focus:ring-purple-500"
+                    />
+                  </div>
+
+                  <div>
+                    <Label className="text-gray-700 mb-2 block">
+                      Email address
+                    </Label>
+                    <Input
+                      placeholder="your@email.com"
+                      id="email"
+                      type="email"
+                      required
+                      className="w-full p-3 rounded-xl border-gray-200 focus:ring-purple-500"
+                    />
+                  </div>
+
+                  <div>
+                    <Label className="text-gray-700 mb-2 block">
+                      Shipping Address
+                    </Label>
+                    <Input
+                      placeholder="Enter your shipping address"
+                      id="address"
+                      required
+                      className="w-full p-3 rounded-xl border-gray-200 focus:ring-purple-500"
+                    />
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Order Summary Section */}
+            {checkOut && (
+              <div className="lg:w-1/3 bg-white p-6 rounded-2xl shadow-sm max-sm:p-4">
+                <h3 className="text-xl font-semibold mb-6 text-gray-800 max-sm:text-lg">
+                  Order Summary
+                </h3>
+
+                <div className="space-y-4">
+                  {cartState.items.map((item) => (
+                    <div
+                      key={item.id}
+                      className="flex items-center gap-4 py-3 border-b"
+                    >
+                      <img
+                        src={item.image}
+                        alt={item.name}
+                        className="w-16 h-16 object-cover rounded-xl"
+                      />
+                      <div className="flex-1">
+                        <p className="font-medium text-gray-800 max-sm:text-sm">
+                          {item.name}
+                        </p>
+                        <div className="flex justify-between items-center mt-1">
+                          <span className="text-sm text-gray-500">
+                            Qty: {item.quantity}
+                          </span>
+                          <span className="font-semibold text-purple-600">
+                            ₦{(item.price * item.quantity).toLocaleString()}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+
+                  <div className="pt-4 space-y-3">
+                    <div className="flex justify-between text-gray-600">
+                      <span>Subtotal</span>
+                      <span>₦{cartState.total.toLocaleString()}</span>
+                    </div>
+                    <div className="flex justify-between text-gray-600">
+                      <span>Shipping</span>
+                      <span className="text-green-600">Free</span>
+                    </div>
+                    <div className="flex justify-between text-lg font-semibold pt-3 border-t">
+                      <span>Total</span>
+                      <span className="text-purple-600">
+                        ₦{cartState.total.toLocaleString()}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
         </form>
 
-        {!isUserSignedIn && (
-          <p className="text-red-500 mt-2">
-            Please sign in to proceed with checkout.
-          </p>
-        )}
-
-        {isCartEmpty && (
-          <p className="text-red-500 mt-2">
-            Your cart is empty. Please add items to your cart before proceeding
-            to checkout.
-          </p>
-        )}
-
-        <div className="details flex justify-between items-center m-10 gap-4">
-          {/* Render installment payment details if 'installment' is selected */}
-          {checkOut === "installment" && (
-            <>
-              <div className="package_summary w-[50%]">
-                {/* Heading for installment payment section */}
-                <h3 className="text-lg font-semibold mb-4">
-                  Installment payment
-                </h3>
-                {/* Selection of number of months for installments */}
-                <div className="flex flex-col gap-2 mb-4">
-                  <Label htmlFor="months">Number of months</Label>
-                  <Select
-                    id="months"
-                    onValueChange={(value) => {
-                      setMonths(Number(value));
-                      // Validate form when months are selected
-                      setIsFormValid(!!value && !!paymentDay);
-                    }}
-                  >
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select a month" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {/* Options for number of months */}
-                      {[2, 4, 6, 9, 12].map((item) => (
-                        <SelectItem key={item} value={item.toString()}>
-                          {item} month{item > 1 ? "s" : ""}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
-                {/* Selection of payment day of the month */}
-                <div className="flex flex-col gap-2">
-                  <Label>Payment Day of Month</Label>
-                  <Select
-                    id="paymentDay"
-                    onValueChange={(value) => {
-                      setPaymentDay(Number(value));
-                      // Validate form when payment day is selected
-                      setIsFormValid(!!value && !!months);
-                    }}
-                  >
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select a Day" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {/* Options for days 1 through 28 */}
-                      {Array.from({ length: 28 }, (_, i) => i + 1).map(
-                        (day) => (
-                          <SelectItem key={day} value={day.toString()}>
-                            {day}
-                          </SelectItem>
-                        )
-                      )}
-                    </SelectContent>
-                  </Select>
-                </div>
-                {/* Display payment summary if the form is valid */}
-                {isFormvalid && (
-                  <div className="confirm m-8 p-4 bg-blue-100 rounded-md">
-                    <p className="text-sm font-semibold">
-                      ₦ {monthlyPayment.toFixed(2)} will be deducted from your
-                      bank on day {paymentDay} of each month for the next{" "}
-                      {months} month{months && months > 1 ? "s" : ""}.
-                    </p>
-                  </div>
-                )}
-                {/* Checkbox for confirming installment package details */}
-                <div className="confirm flex gap-4 items-center mt-8">
-                  <Checkbox
-                    checked={isPaymentConfirmed}
-                    onCheckedChange={handlePackageConfirmation}
-                    disabled={!months || !paymentDay}
-                  />
-                  <Label
-                    htmlFor="confirmPackage"
-                    className={!months || !paymentDay ? "opacity-50" : ""}
-                  >
-                    I confirm the installment package details
-                  </Label>
-                </div>
-              </div>
-            </>
-          )}
-
-          {/* Render the direct payment form when 'direct' payment method is selected */}
-          {checkOut === "direct" && (
-            <div className="direct flex flex-col gap-4 w-[50%]">
-              {/* Heading for the billing information section */}
-              <h3 className="text-lg font-semibold mb-4">
-                Billing Information
-              </h3>
-              {/* Full Name input field */}
-              <div className="space-y-2">
-                <Label htmlFor="fullname">Full Name</Label>
-                <Input placeholder="xammie" id="fullname" required />
-              </div>
-              {/* Email address input field */}
-              <div className="space-y-2">
-                <Label htmlFor="email">Email address</Label>
-                <Input placeholder="xammie@gmail.com" id="email" required />
-              </div>
-              {/* Shipping Address input field */}
-              <div className="space-y-2">
-                <Label htmlFor="address">Shipping Address</Label>
-                <Input
-                  placeholder="1234 Main St, Anytown, USA"
-                  id="address"
-                  required
-                />
-              </div>
-            </div>
-          )}
-
-          {/* Render product summary if a checkout method is selected */}
-          {checkOut && (
-            <div className="prod_summary">
-              <div className="grid grid-rows-3 gap-4">
-                {/* Iterate over cart items and display each product */}
-                {cartState.items.map((item) => (
-                  <div
-                    key={item.id}
-                    className="flex gap-4 items-center justify-between"
-                  >
-                    {/* Product image */}
-                    <img
-                      src={item.image}
-                      alt={item.name}
-                      className="w-10 h-10 object-cover"
-                    />
-                    {/* Product name */}
-                    <p className="text-xs">{item.name}</p>
-                    {/* Product total price */}
-                    <p className="text-xs font-semibold">
-                      ₦{(item.price * item.quantity).toLocaleString()}
-                    </p>
-                  </div>
-                ))}
-              </div>
-              {/* Display subtotal and shipping information */}
-              <div className="mt-4 flex justify-between flex-col text-right">
-                <p className="text-lg font-bold">
-                  Subtotal: ₦{cartState.total.toLocaleString()}
-                </p>
-                <p className="text-lg font-bold">Shipping: Free</p>
-              </div>
-            </div>
-          )}
-        </div>
-
-        {/* Button to place the order */}
+        {/* Place Order Button */}
         <button
-          className="bg-red-500 hover:bg-green-600 mt-8 text-white font-bold py-2 px-4 rounded transition duration-300 ease-in-out transform hover:scale-105 w-full max-sm:py-1 max-sm:px-2 max-sm:items-center"
           onClick={handleSubmit}
+          className="bg-purple-700 text-white px-6 py-3 rounded-lg transition duration-300 ease-in-out transform hover:scale-105 hover:bg-green-600 w-fit"
         >
           Place Order
         </button>
       </div>
-      {/* Alert dialog for delivery details notification */}
+
+      {/* Alert Dialog and Bank Card Modal styling updates */}
       <AlertDialog open={showAlert} onOpenChange={setShowAlert}>
-        <AlertDialogContent>
+        <AlertDialogContent className=" rounded-2xl max-sm:my-10">
           <AlertDialogHeader>
-            <AlertDialogTitle>Delivery Details Required</AlertDialogTitle>
-            <AlertDialogDescription>
+            <AlertDialogTitle className="max-sm:text-sm">
+              Delivery Details Required
+            </AlertDialogTitle>
+            <AlertDialogDescription className="max-sm:text-xs">
               Please note that delivery details will be required after your
               first payment is processed.
             </AlertDialogDescription>
@@ -372,17 +399,18 @@ const CheckOut = () => {
         </AlertDialogContent>
       </AlertDialog>
 
-      {/* BankCard Modal */}
       {showBankCardModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 backdrop-filter backdrop-blur-sm">
-          <div className="bg-white rounded-lg p-6 max-w-md w-full mx-auto my-4">
-            <div className="flex justify-between items-center mb-4">
-              <h2 className="text-2xl font-bold">Add Payment Method</h2>
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-8 max-sm:p-4 ">
+          <div className="bg-white rounded-3xl p-8 max-w-md w-full mx-auto max-sm:rounded-2xl max-sm:p-6 max-sm:my-10">
+            <div className="flex justify-between items-center mb-6 max-sm:mb-4">
+              <h2 className="text-2xl font-bold text-gray-800 max-sm:text-sm">
+                Add Payment Method
+              </h2>
               <button
                 onClick={() => setShowBankCardModal(false)}
-                className="text-gray-500 hover:text-gray-700 "
+                className="text-gray-500 hover:text-gray-700"
               >
-                <TbEyeClosed style={{ fontSize: "2rem", color: "black" }} />
+                <TbEyeClosed className="w-6 h-6 max-sm:w-5 max-sm:h-5" />
               </button>
             </div>
             <BankCard onSuccess={handleBankCardSuccess} />

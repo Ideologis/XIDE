@@ -117,12 +117,16 @@ const BankCard = () => {
   };
 
   return (
-    <div className="w-full max-w-md mx-auto bg-white rounded-xl shadow-lg ">
-      <div className="p-8">
-        <h2 className="text-3xl font-bold mb-6 text-gray-800">Add Card</h2>
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+    <div className="w-full  mx-auto bg-white rounded-2xl max-sm:rounded-xl  ">
+      <div className="p-6 max-sm:p-4">
+        <h2 className="text-2xl font-bold mb-6 text-gray-800 max-sm:text-sm max-sm:mb-4">
+          Add Payment Card
+        </h2>
+        
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 max-sm:space-y-4">
+          {/* Cardholder Name Field */}
           <div className="space-y-2">
-            <label className="text-sm font-medium text-gray-700">
+            <label className="text-sm font-medium text-gray-700 block">
               Cardholder Name
             </label>
             <div className="relative">
@@ -131,7 +135,7 @@ const BankCard = () => {
                 {...register("cardholderName")}
                 type="text"
                 placeholder="John Doe"
-                className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full pl-10 pr-3 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent max-sm:text-sm"
                 onKeyDown={(e) => {
                   if (!/[A-Za-z\s]/.test(e.key) && e.key !== "Backspace") {
                     e.preventDefault();
@@ -140,38 +144,39 @@ const BankCard = () => {
               />
             </div>
             {errors.cardholderName && (
-              <p className="text-sm text-red-600">
+              <p className="text-sm text-red-600 mt-1">
                 {errors.cardholderName.message}
               </p>
             )}
           </div>
 
+          {/* Card Number Field */}
           <div className="space-y-2">
-            <label className="text-sm font-medium text-gray-700">
+            <label className="text-sm font-medium text-gray-700 block">
               Card Number
             </label>
             <div className="relative">
               <FaCreditCard className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
               <input
-                // Start of Selection
                 {...register("cardNumber")}
                 type="text"
                 placeholder="1234 5678 9012 3456"
-                className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full pl-10 pr-3 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent max-sm:text-sm"
                 onInput={handleInput}
                 onKeyDown={handleKeyDown}
               />
             </div>
             {errors.cardNumber && (
-              <p className="text-sm text-red-600">
+              <p className="text-sm text-red-600 mt-1">
                 {errors.cardNumber.message}
               </p>
             )}
           </div>
 
-          <div className="flex space-x-4">
+          {/* Expiry Date and Security Code */}
+          <div className="flex space-x-4 max-sm:space-x-3">
             <div className="flex-1 space-y-2">
-              <label className="text-sm font-medium text-gray-700">
+              <label className="text-sm font-medium text-gray-700 block">
                 Expiry Date
               </label>
               <div className="relative">
@@ -180,18 +185,18 @@ const BankCard = () => {
                   {...register("expiryDate")}
                   type="text"
                   placeholder="MM/YY"
-                  className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full pl-10 pr-3 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent max-sm:text-sm"
                 />
               </div>
               {errors.expiryDate && (
-                <p className="text-sm text-red-600">
+                <p className="text-sm text-red-600 mt-1">
                   {errors.expiryDate.message}
                 </p>
               )}
             </div>
 
             <div className="flex-1 space-y-2">
-              <label className="text-sm font-medium text-gray-700">
+              <label className="text-sm font-medium text-gray-700 block">
                 Security Code
               </label>
               <div className="relative">
@@ -199,8 +204,8 @@ const BankCard = () => {
                 <input
                   {...register("securityCode")}
                   type="password"
-                  placeholder="***"
-                  className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  placeholder="****"
+                  className="w-full pl-10 pr-3 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent max-sm:text-sm"
                   maxLength={4}
                   onKeyDown={(e) => {
                     if (!/^\d$/.test(e.key) && e.key !== "Backspace") {
@@ -210,26 +215,28 @@ const BankCard = () => {
                 />
               </div>
               {errors.securityCode && (
-                <p className="text-sm text-red-600">
+                <p className="text-sm text-red-600 mt-1">
                   {errors.securityCode.message}
                 </p>
               )}
             </div>
           </div>
 
+          {/* Submit Button */}
           <button
             type="submit"
-            className="w-full bg-blue-600 text-white font-semibold py-3 rounded-lg hover:bg-blue-700 transition duration-300 ease-in-out transform hover:scale-105"
+            className="w-full bg-purple-700 text-white font-semibold py-3.5 rounded-xl hover:bg-green-600 transition duration-300 ease-in-out transform hover:scale-105 shadow-md max-sm:text-sm"
           >
             Add Card
           </button>
         </form>
 
-        <div className="mt-6">
+        {/* Payment Methods Image */}
+        <div className="mt-8 max-sm:mt-6">
           <img
             src="/Frame 834.png"
             alt="Supported payment methods"
-            className="mx-auto max-w-full h-auto"
+            className="mx-auto max-w-full h-auto rounded-lg"
           />
         </div>
       </div>

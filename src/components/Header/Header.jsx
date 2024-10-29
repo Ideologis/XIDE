@@ -15,7 +15,7 @@ const Header = () => {
               height={50}
               className=" max-sm:hidden"
             />
-            <p className="text-white  text-sm max-sm:text-sm max-sm:pt-4 max-sm:text-center">
+            <p className="text-white  text-sm max-sm:hidden">
               iPhone 14 Series
             </p>
           </div>
