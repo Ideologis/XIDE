@@ -143,9 +143,9 @@ const Navbar = () => {
                 </motion.button>
               ))}
             </div>
-            <div className="flex items-center">
+            {/* Desktop User/Profile Section */}
+            <div className="max-sm:hidden flex items-center">
               <motion.button
-                
                 whileHover={{
                   scale: 1.1,
                   transition: {
@@ -154,6 +154,7 @@ const Navbar = () => {
                     stiffness: 100,
                   },
                 }}
+                className="ml-4"
               >
                 {!cartState.userEmail ? (
                   <NavLink
@@ -165,23 +166,20 @@ const Navbar = () => {
                 ) : (
                   cartState.userEmail &&
                   cartState.showProfile && (
-                    <NavLink to="/SignUp" className="relative group">
+                    <NavLink
+                      to="/SignUp"
+                      className="relative group flex items-center gap-2"
+                    >
                       <div className="h-8 w-8 rounded-full bg-blue-500 flex items-center justify-center text-white cursor-pointer">
                         {getUserInitial(cartState.userEmail)}
                       </div>
-                      <div className="absolute right-0 w-48 mt-2 py-2 bg-white rounded-md shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
-                        <div className="px-4 py-2 text-sm text-gray-700 truncate">
-                          {cartState.userEmail}
-                        </div>
-                      </div>
-                      <div>
-                        <h1 className="text-2xl font-bold text-gray-800">
-                          Hi!
-                        </h1>
-                        <p className="text-purple-700 font-medium">
-                          {cartState.userEmail?.split("@")[0].split(".")[0]}
-                        </p>
-                      </div>
+
+                      <h1 className="text-xl font-semibold text-gray-800">
+                        Hi!
+                      </h1>
+                      <p className="text-purple-700 font-medium">
+                        {cartState.userEmail?.split("@")[0].split(".")[0]}
+                      </p>
                     </NavLink>
                   )
                 )}
@@ -285,19 +283,54 @@ const Navbar = () => {
                     ))}
                   </ul>
 
+                  {/* Mobile Only User/Profile Section */}
                   <div className="mt-auto flex justify-around py-4 border-t">
                     <FiHeart
                       size={24}
                       className="text-gray-700 hover:text-gray-900 cursor-pointer"
                     />
-                    {cartState.userEmail && cartState.showProfile && (
-                      <NavLink
-                        to="/signup"
-                        className="h-8 w-8 rounded-full bg-blue-500 flex items-center justify-center text-white"
-                      >
-                        {getUserInitial(cartState.userEmail)}
-                      </NavLink>
-                    )}
+                    <motion.button
+                      whileHover={{
+                        scale: 1.1,
+                        transition: {
+                          duration: 0.3,
+                          type: "spring",
+                          stiffness: 100,
+                        },
+                      }}
+                    >
+                      {!cartState.userEmail ? (
+                        <NavLink
+                          to="/SignUp"
+                          className="text-gray-700 hover:text-gray-900"
+                          onClick={toggleMenu}
+                        >
+                          Sign Up
+                        </NavLink>
+                      ) : (
+                        cartState.userEmail &&
+                        cartState.showProfile && (
+                          <NavLink
+                            to="/SignUp"
+                            className="relative group flex items-center gap-2"
+                            onClick={toggleMenu}
+                          >
+                            <div className="h-8 w-8 rounded-full bg-blue-500 flex items-center justify-center text-white cursor-pointer">
+                              {getUserInitial(cartState.userEmail)}
+                            </div>
+
+                            <h1 className="text-xl font-semibold text-gray-800">
+                              Hi!
+                            </h1>
+                            <p className="text-purple-700 font-medium">
+                              {cartState.userEmail
+                                ?.split("@")[0]
+                                .split(".")[0]}
+                            </p>
+                          </NavLink>
+                        )
+                      )}
+                    </motion.button>
                   </div>
                 </div>
               </motion.div>
