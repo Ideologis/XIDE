@@ -62,7 +62,7 @@ const Navbar = () => {
   };
 
   // Array of menu items
-  const menuItems = ["Home", "Contact", "About", "SignUp"];
+  const menuItems = ["Home", "Contact", "About"];
 
   // Function to handle language selection
   function handleLanguage(event) {
@@ -105,21 +105,87 @@ const Navbar = () => {
           scrollY > 0 ? "top-0" : "top-[60px]"
         } ${scrollY > 0 ? "max-sm:top-0" : "max-sm:top-[80px]"}`}
       >
-        <div className="mx-auto px-4 max-sm:px-3">
+        <div className="mx-auto px-10 max-sm:px-3">
           <div className="flex justify-between items-center h-16 max-sm:h-14">
-            <NavLink to="/" className="font-bold text-xl max-sm:text-lg cursor-pointer">XIDE</NavLink>
-
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1.5 }}
+            >
+              <NavLink
+                to="/"
+                className="font-bold text-xl max-sm:text-lg cursor-pointer"
+              >
+                XIDE
+              </NavLink>
+            </motion.div>
             {/* Desktop Menu */}
-            <div className=" max-sm:hidden lg:flex items-center space-x-8">
+            <div className="max-sm:hidden lg:flex items-center space-x-8">
               {menuItems.map((item) => (
-                <NavLink
+                <motion.button
                   key={item}
-                  to={item === "Home" ? "/" : `/${item.toLowerCase()}`}
-                  className="text-gray-700 hover:text-gray-900"
+                  whileHover={{
+                    scale: 1.1,
+                    transition: {
+                      duration: 0.3,
+                      type: "spring",
+                      stiffness: 100,
+                    },
+                  }}
                 >
-                  {item}
-                </NavLink>
+                  <NavLink
+                    key={item}
+                    to={item === "Home" ? "/" : `/${item.toLowerCase()}`}
+                    className="text-gray-700 hover:text-gray-900"
+                  >
+                    {item}
+                  </NavLink>
+                </motion.button>
               ))}
+            </div>
+            <div className="flex items-center">
+              <motion.button
+                
+                whileHover={{
+                  scale: 1.1,
+                  transition: {
+                    duration: 0.3,
+                    type: "spring",
+                    stiffness: 100,
+                  },
+                }}
+              >
+                {!cartState.userEmail ? (
+                  <NavLink
+                    to="/SignUp"
+                    className="text-gray-700 hover:text-gray-900"
+                  >
+                    Sign Up
+                  </NavLink>
+                ) : (
+                  cartState.userEmail &&
+                  cartState.showProfile && (
+                    <NavLink to="/SignUp" className="relative group">
+                      <div className="h-8 w-8 rounded-full bg-blue-500 flex items-center justify-center text-white cursor-pointer">
+                        {getUserInitial(cartState.userEmail)}
+                      </div>
+                      <div className="absolute right-0 w-48 mt-2 py-2 bg-white rounded-md shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+                        <div className="px-4 py-2 text-sm text-gray-700 truncate">
+                          {cartState.userEmail}
+                        </div>
+                      </div>
+                      <div>
+                        <h1 className="text-2xl font-bold text-gray-800">
+                          Hi!
+                        </h1>
+                        <p className="text-purple-700 font-medium">
+                          {cartState.userEmail?.split("@")[0].split(".")[0]}
+                        </p>
+                      </div>
+                    </NavLink>
+                  )
+                )}
+              </motion.button>
             </div>
 
             {/* Mobile Menu Button - Move to right side */}
@@ -170,25 +236,6 @@ const Navbar = () => {
                   </span>
                 )}
               </NavLink>
-              <div className="flex items-center">
-                {cartState.userEmail && cartState.showProfile && (
-                  <NavLink to="/SignUp" className="relative group">
-                    <div className="h-8 w-8 rounded-full bg-blue-500 flex items-center justify-center text-white cursor-pointer">
-                      {getUserInitial(cartState.userEmail)}
-                    </div>
-                    <div className="absolute right-0 w-48 mt-2 py-2 bg-white rounded-md shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
-                      <div className="px-4 py-2 text-sm text-gray-700 truncate">
-                        {cartState.userEmail}
-                      </div>
-                    </div>
-                  </NavLink>
-                )}
-                {/* {cartState.userEmail ? (
-                  <span>Welcome, {cartState.userEmail}</span>
-                ) : (
-                  <span>Not logged in</span>
-                )} */}
-              </div>
             </div>
           </div>
 

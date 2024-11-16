@@ -29,7 +29,7 @@ const Carousels = ({products, ProductCardComponent}) => {
             <div className="flex justify-center">
               <Card className="w-full max-w-xs max-sm:max-w-full">
                 <CardContent className="p-0">
-                  <ProductCardComponent items={item} />
+                  <ProductCardComponent items={item} /> {/*item represent FlashCard*/}
                 </CardContent>
               </Card>
             </div>
